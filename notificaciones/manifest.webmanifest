@@ -1,0 +1,12 @@
+{
+ "name":"AVIVA EL FUEGO 2026",
+ "short_name":"AVIVA EL FUEGO",
+ "description":"Notificaciones administrativas de registraciones",
+ "id":"/rav-aviva-el-fuego-2026/notificaciones/",
+ "start_url":"/rav-aviva-el-fuego-2026/notificaciones/",
+ "scope":"/rav-aviva-el-fuego-2026/notificaciones/",
+ "display":"standalone",
+ "background_color":"#320712",
+ "theme_color":"#540a1b",
+ "icons":[{"src":"../aviva-icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"../aviva-icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"}]
+}
