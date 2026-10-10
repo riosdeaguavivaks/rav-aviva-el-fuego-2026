@@ -407,7 +407,7 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--gold);outl
           <span></span><span id="catHead">Categoría</span><span id="nameHead">Nombre completo</span><span id="costHead">Costo</span><span></span>
         </div>
         <div id="people"></div>
-        <button type="button" class="add" id="addPerson">+ Agregar otra persona</button>
+        <button type="button" class="add" id="addPerson">+ Agregar persona</button>
       </section>
 
       <div class="bottom">
@@ -417,7 +417,7 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--gold);outl
           <div class="line"><span id="generalLbl">General</span><strong id="generalSum">$0</strong></div>
           <div class="line"><span id="childLbl">Niño (3–10 años)</span><strong id="childSum">$0</strong></div>
           <div class="total"><span id="totalLbl">Total:</span><strong id="total">$0</strong></div>
-          <div class="notice" id="pricesNote">Cada persona se cobra según su categoría.</div>
+          <div class="notice" id="pricesNote" hidden style="display:none"></div>
         </section>
 
         <section>
@@ -468,8 +468,8 @@ const words = {
     hero:'AVIVA EL FUEGO', sub:'CONFERENCIA DE PREDICACIÓN', speakers:'NOÉ HERNÁNDEZ, EVANGELISTA MARIO ALAS, Y PASTORES MIKE ORTEGA, MIZAEL MONTAÑEZ',
     form:'Tarjeta de Registración', intro:'Complete su información para registrarse', contact:'Información de contacto', phone:'Número de teléfono *',
     email:'Correo electrónico *', church:'Iglesia que nos visita *', churchPH:'Nombre de su iglesia', people:'Personas a registrar',
-    cat:'Categoría', name:'Nombre completo', namePH:'Nombre completo', cost:'Costo', add:'+ Agregar otra persona', summary:'Resumen de costos',
-    pastor:'Pastor y Esposa', pastorWife:'Pastor y Esposa', general:'General', child:'Niño (3–10 años)', total:'Total:', note:'Pastor y Esposa representa 2 personas por $40.',
+    cat:'Categoría', name:'Nombre completo', namePH:'Nombre completo', cost:'Costo', add:'+ Agregar persona', summary:'Resumen de costos',
+    pastor:'Pastor y Esposa', pastorWife:'Pastor y Esposa', general:'General', child:'Niño (3–10 años)', total:'Total:', note:'',
     payment:'Método de pago', submit:'Completar registración →', inactive:'✅ Registraciones abiertas. Completa el formulario para registrarte.',
     venmo:'Si eliges Venmo, podrás abrir la aplicación de Venmo o ver el código QR. Si la app no está instalada, se abrirá la versión web.',
     back:'Regresar a Ríos de Agua Viva', remove:'Eliminar persona', missing:'Agrega el nombre completo de cada participante.',
@@ -482,8 +482,8 @@ const words = {
     hero:'REKINDLE THE FIRE', sub:'PREACHING CONFERENCE', speakers:'NOÉ HERNÁNDEZ, EVANGELIST MARIO ALAS, AND PASTORS MIKE ORTEGA, MIZAEL MONTAÑEZ',
     form:'Registration Form', intro:'Please complete your information to register', contact:'Contact Information', phone:'Phone Number *',
     email:'Email Address *', church:'Church You Attend *', churchPH:'Name of your church', people:'People to Register',
-    cat:'Category', name:'Full Name', namePH:'Full name', cost:'Cost', add:'+ Add another person', summary:'Cost Summary',
-    pastor:'Pastor and Wife', pastorWife:'Pastor and Wife', general:'General', child:'Child (3–10 years)', total:'Total:', note:'Pastor and Wife represents 2 people for $40.',
+    cat:'Category', name:'Full Name', namePH:'Full name', cost:'Cost', add:'+ Add Person', summary:'Cost Summary',
+    pastor:'Pastor and Wife', pastorWife:'Pastor and Wife', general:'General', child:'Child (3–10 years)', total:'Total:', note:'',
     payment:'Payment Method', submit:'Complete Registration →', inactive:'✅ Registration is open. Complete the form to register.',
     venmo:'If you select Venmo, you can try opening the Venmo app or view the QR code. If the app is not installed, the web version will open.',
     back:'Return to Ríos de Agua Viva', remove:'Remove person', missing:'Enter the full name of every attendee.',
