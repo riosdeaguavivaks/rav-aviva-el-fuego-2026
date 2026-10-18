@@ -279,9 +279,10 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--gold);outl
 .submit{width:100%;margin-top:20px;border:none;border-radius:11px;background:linear-gradient(110deg,#b40442,#fa773f);color:white;font:23px Georgia,serif;padding:18px 10px;cursor:pointer}
 .submit:disabled{opacity:.55;cursor:not-allowed}
 .notice{font-family:Arial,sans-serif;font-size:12px;color:#ebc9c7;margin:12px 0;line-height:1.5}
-.feedback{display:none;border:1px solid #eda45b;padding:12px;border-radius:7px;margin-top:12px;line-height:1.5}
+.feedback{white-space:pre-line;display:none;border:1px solid #eda45b;padding:12px;border-radius:7px;margin-top:12px;line-height:1.5}
 .footer{text-align:center;font-size:14px;margin:24px 0;color:#fae3dc}.footer a{color:#ffd2ab}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+#cashNotice{white-space:pre-line;line-height:1.6}
 .venmo-menu{margin-top:12px;border:1px solid #9e5157;border-radius:10px;background:#2e1019;padding:14px}
 .venmo-actions{display:flex;gap:10px}
 .venmo-action{flex:1;border:1px solid #d69b67;color:#ffe0c3;background:#471725;border-radius:7px;padding:12px 8px;cursor:pointer;font:16px Georgia,serif}
@@ -475,7 +476,7 @@ const words = {
     venmo:'Si eliges Venmo, podrás abrir la aplicación de Venmo o ver el código QR. Si la app no está instalada, se abrirá la versión web.',
     back:'Regresar a Ríos de Agua Viva', remove:'Eliminar persona', missing:'Agrega el nombre completo de cada participante.',
     notReady:'El formulario todavía no está conectado al sistema de registros. No se guardó ni envió ningún dato.', sending:'Enviando registración...',
-    sent:'Registro enviado. Estado del pago: pendiente de verificación.', err:'No se pudo confirmar la registración. No hagas el pago hasta verificar el registro.',
+    sent:'Registro enviado. Estado del pago: pendiente de verificación. ¡Muchas gracias por su colaboración y por ser parte de AVIVA EL FUEGO 2026!', err:'No se pudo confirmar la registración. No hagas el pago hasta verificar el registro.',
     venmoGo:'Abrir Venmo para pagar', venmoOpen:'Abrir aplicación', venmoQR:'Ver código QR', qrTitle:'Código QR de Venmo',
     qrExplanation:'Escanea el código QR para abrir el perfil de Venmo de Ríos de Agua Viva.', qrProfile:'Abrir Venmo'
   },
@@ -489,7 +490,7 @@ const words = {
     venmo:'If you select Venmo, you can try opening the Venmo app or view the QR code. If the app is not installed, the web version will open.',
     back:'Return to Ríos de Agua Viva', remove:'Remove person', missing:'Enter the full name of every attendee.',
     notReady:'This form is not yet connected to the registration system. No data was saved or sent.', sending:'Submitting registration...',
-    sent:'Registration submitted. Payment status: pending verification.', err:'Could not confirm registration. Do not pay until your registration is verified.',
+    sent:'Registration submitted. Payment status: pending verification. Thank you for your cooperation and for being part of REKINDLE THE FIRE 2026!', err:'Could not confirm registration. Do not pay until your registration is verified.',
     venmoGo:'Open Venmo to pay', venmoOpen:'Open Venmo App', venmoQR:'View QR Code', qrTitle:'Venmo QR Code',
     qrExplanation:'Scan this QR code to open Ríos de Agua Viva on Venmo.', qrProfile:'Open Venmo'
   }
@@ -522,7 +523,7 @@ function setLanguage(l){
     if(el) el.textContent = t()[key];
   }
   document.getElementById('church').placeholder = t().churchPH;
-  document.getElementById('cashNotice').textContent = lang === 'es' ? 'Pago en efectivo: podrá realizar su pago directamente en la iglesia. Su registración permanecerá pendiente de pago hasta que se confirme la recepción del efectivo.' : 'Cash payment: You may pay directly at the church. Your registration will remain pending payment until your cash payment is confirmed.';
+  document.getElementById('cashNotice').textContent = lang === 'es' ? '💵 INSTRUCCIONES PARA PAGO EN EFECTIVO\n\nPuede realizar su pago en efectivo directamente con la persona encargada del evento.\n\nTambién puede solicitar un sobre a cualquiera de nuestros ujieres. Por favor, escriba claramente en el sobre:\n• Nombre completo de la persona que realizó la registración.\n• Nombre del evento: AVIVA EL FUEGO 2026.\n• Concepto: Pago de registración.\n• Cantidad de dinero incluida en el sobre.\n\nUna vez completada la información, coloque el dinero dentro del sobre, ciérrelo y deposítelo en cualquiera de los buzones de nuestra iglesia.\n\n⚠️ IMPORTANTE: Su registración permanecerá PENDIENTE DE PAGO hasta que el efectivo sea recibido y el pago confirmado por nuestro equipo administrativo.\n\n¡Muchas gracias por su colaboración y por ser parte de AVIVA EL FUEGO 2026!' : "💵 CASH PAYMENT INSTRUCTIONS\n\nYou may make your cash payment directly to the person in charge of the event.\n\nAlternatively, you may request an envelope from any of our ushers. Please clearly write the following information on the envelope:\n• Full name of the person who completed the registration.\n• Event name: REKINDLE THE FIRE 2026.\n• Purpose: Registration Payment.\n• Amount of cash enclosed.\n\nOnce the information is complete, place the cash inside the envelope, seal it, and deposit it in one of our church's designated offering boxes.\n\n⚠️ IMPORTANT: Your registration will remain PAYMENT PENDING until the cash has been received and the payment confirmed by our administrative team.\n\nThank you for your cooperation and for being part of REKINDLE THE FIRE 2026!";
   document.getElementById('cashNotice').hidden = pay !== 'cash';
   document.getElementById('venmoHelp').textContent = t().venmo;
   document.getElementById('openVenmo').textContent = t().venmoOpen;
