@@ -359,6 +359,12 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--gold);outl
  mask-composite:intersect;
 }
 @media(max-width:760px){.page::after{background-size:100% auto;background-position:center top;opacity:1}}
+
+/* Cierre público RAV */
+#closedPanel{display:none;text-align:center;border:1px solid #f5af53;background:linear-gradient(145deg,#3c0c18,#19060b);padding:28px 18px;border-radius:16px;margin:18px 0;color:#fff5ee}
+#closedPanel h2{border:0;color:#ffd18a;font-size:clamp(26px,4vw,42px);margin:12px 0}
+#closedPanel p{font-size:clamp(16px,2vw,20px);line-height:1.55}
+#closedPanel .times{background:#341609;border-radius:12px;padding:14px;margin-top:16px}
 </style>
 </head>
 <body>
@@ -383,7 +389,14 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--gold);outl
       </div>
     </div>
 
-    <form id="registration">
+    <section id="closedPanel" role="status" aria-live="polite">
+<div style="font-size:40px" aria-hidden="true">🔥</div>
+<h2 id="closedTitle"></h2>
+<p id="closedDescription"></p>
+<p id="closedInvite"></p>
+<div class="times"><strong id="closedDate"></strong><p id="closedDoors"></p><p id="closedStart"></p></div>
+</section>
+<form id="registration">
       <section>
         <h2 id="contactHead">Información de contacto</h2>
         <div class="contacts">
@@ -504,6 +517,24 @@ const fieldMap = {
 };
 
 let lang = localStorage.getItem('avivaLang') || ((navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en');
+// 12 de noviembre 2026, 12:00 PM en Kansas City (CST = UTC-06:00).
+const PUBLIC_CLOSE_AT = Date.parse('2026-11-12T12:00:00-06:00');
+function publicClosed(){ return Date.now() >= PUBLIC_CLOSE_AT; }
+function refreshPublicClosure(){
+  const closed = publicClosed();
+  document.getElementById('registration').style.display = closed ? 'none' : '';
+  const panel = document.getElementById('closedPanel');
+  panel.style.display = closed ? 'block' : 'none';
+  if(closed){
+    const es = lang === 'es';
+    document.getElementById('closedTitle').textContent = es ? 'REGISTRACIONES CERRADAS' : 'REGISTRATIONS CLOSED';
+    document.getElementById('closedDescription').textContent = es ? 'El período de registraciones en línea ha finalizado.' : 'Online registration has officially closed.';
+    document.getElementById('closedInvite').textContent = es ? '¡Gracias por tu interés! Te invitamos a acompañarnos en esta gran conferencia de predicación.' : 'Thank you for your interest! We invite you to join us for this special preaching conference.';
+    document.getElementById('closedDate').textContent = es ? 'JUEVES 12 DE NOVIEMBRE' : 'THURSDAY, NOVEMBER 12';
+    document.getElementById('closedDoors').textContent = es ? 'Apertura de puertas: 5:30 PM' : 'Doors Open: 5:30 PM';
+    document.getElementById('closedStart').textContent = es ? 'Inicio del evento: 7:00 PM' : 'Event Starts: 7:00 PM';
+  }
+}
 let pay = 'cash';
 let nextId = 1;
 let people = [{ id: nextId++, type:'general', name:'' }];
@@ -533,6 +564,7 @@ function setLanguage(l){
   document.getElementById('qrExplanation').textContent = t().qrExplanation;
   document.getElementById('qrProfile').textContent = t().qrProfile;
   renderPeople();
+  refreshPublicClosure();
 }
 
 function renderPeople(){
@@ -680,6 +712,7 @@ document.addEventListener('keydown',event => { if(event.key === 'Escape') qrOver
 
 document.getElementById('registration').addEventListener('submit', async event => {
   event.preventDefault();
+  if(publicClosed()){ refreshPublicClosure(); return; }
   if(!event.target.reportValidity()) return;
   if(people.some(p => !p.name.trim())){ showFeedback(t().missing); return; }
   if(!REGISTRATION_ENDPOINT){ showFeedback(t().notReady); return; }
@@ -730,6 +763,7 @@ document.getElementById('registration').addEventListener('submit', async event =
 });
 
 setLanguage(lang);
+setInterval(refreshPublicClosure, 1000);
 </script>
 </body>
 </html>
